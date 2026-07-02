@@ -10,13 +10,17 @@ import { UserNote } from '@/types';
 import { FileText, Plus, Trash2, Clock } from 'lucide-react';
 
 export default function NotesPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [notes, setNotes] = React.useState<UserNote[]>([]);
   const [activeNoteId, setActiveNoteId] = React.useState<string | null>(null);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const fetchNotes = React.useCallback(async () => {
-    if (!user) return;
+    if (loading) return;
+    if (!user) {
+      setIsLoading(false);
+      return;
+    }
     try {
       const data = await getUserNotes(user.uid);
       setNotes(data.sort((a, b) => b.updatedAt - a.updatedAt));
@@ -25,7 +29,7 @@ export default function NotesPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [user, loading]);
 
   React.useEffect(() => {
     fetchNotes();

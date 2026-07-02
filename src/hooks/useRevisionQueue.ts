@@ -5,12 +5,16 @@ import { RevisionCard } from '@/types';
 import { calculateNextReview } from '@/lib/spacedRepetition';
 
 export function useRevisionQueue() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [dueCards, setDueCards] = useState<RevisionCard[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchDueCards = useCallback(async () => {
-    if (!user) return;
+    if (loading) return;
+    if (!user) {
+      setIsLoading(false);
+      return;
+    }
     try {
       setIsLoading(true);
       const today = new Date().toISOString().split('T')[0];
@@ -21,7 +25,7 @@ export function useRevisionQueue() {
     } finally {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [user, loading]);
 
   useEffect(() => {
     fetchDueCards();

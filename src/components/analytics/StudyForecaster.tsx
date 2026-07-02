@@ -8,7 +8,7 @@ import { tracks } from '@/data/tracks';
 import { BrainCircuit, TrendingUp, Calendar, AlertCircle } from 'lucide-react';
 
 export function StudyForecaster() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [estimatedDate, setEstimatedDate] = React.useState<Date | null>(null);
   const [daysRemaining, setDaysRemaining] = React.useState<number>(0);
   const [velocity, setVelocity] = React.useState<number>(0);
@@ -16,7 +16,11 @@ export function StudyForecaster() {
 
   React.useEffect(() => {
     async function calculateForecast() {
-      if (!user) return;
+      if (loading) return;
+      if (!user) {
+        setIsLoading(false);
+        return;
+      }
       try {
         const progress = await getAllUserProgress(user.uid);
         
@@ -71,7 +75,7 @@ export function StudyForecaster() {
     }
 
     calculateForecast();
-  }, [user]);
+  }, [user, loading]);
 
   if (isLoading) {
     return (

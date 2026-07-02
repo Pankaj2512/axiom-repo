@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { TopicList } from '@/components/syllabus/TopicList';
+import { ModuleClient } from './ModuleClient';
 import { Button } from '@/components/ui/Button';
-import { MentorChat } from '@/components/ai/MentorChat';
+import { ModuleMentorWidget } from '@/components/ai/ModuleMentorWidget';
 import { tracks } from '@/data/tracks';
 import { ArrowLeft, MessageCircle } from 'lucide-react';
 
@@ -91,30 +91,12 @@ export default async function ModuleDetailPage({ params }: ModuleDetailPageProps
             {sortedTopics.reduce((sum, topic) => sum + topic.items.length, 0)} total item
             {sortedTopics.reduce((sum, topic) => sum + topic.items.length, 0) !== 1 ? 's' : ''}
           </div>
-          <TopicList topics={sortedTopics} />
+          <ModuleClient initialTopics={sortedTopics} />
         </>
       )}
 
       {/* Floating AI Mentor */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
-        <details className="group relative">
-          <summary className="list-none cursor-pointer">
-            <div className="w-14 h-14 bg-[var(--accent-primary)] rounded-full shadow-lg shadow-[var(--accent-primary)]/20 flex items-center justify-center hover:scale-110 transition-transform">
-              <MessageCircle className="w-6 h-6 text-white" />
-            </div>
-          </summary>
-          <div className="absolute bottom-20 right-0 w-[400px] origin-bottom-right animate-in zoom-in-95 duration-200">
-            <MentorChat 
-              contextTopic={module.name} 
-              onClose={() => {
-                // Find the details element and remove the 'open' attribute
-                const details = document.querySelector('details.group') as HTMLDetailsElement;
-                if (details) details.open = false;
-              }}
-            />
-          </div>
-        </details>
-      </div>
+      <ModuleMentorWidget contextTopic={module.name} />
     </div>
   );
 }

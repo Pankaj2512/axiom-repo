@@ -3,36 +3,30 @@
 import * as React from 'react';
 import { Card } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
-
-// Helper to generate mock data
-const generateMockHeatmap = () => {
-  const data = [];
-  const today = new Date();
-  
-  for (let i = 105; i >= 0; i--) {
-    const d = new Date(today);
-    d.setDate(d.getDate() - i);
-    
-    // Random activity level 0-4
-    const isWeekend = d.getDay() === 0 || d.getDay() === 6;
-    const baseProb = isWeekend ? 0.7 : 0.3;
-    let count = 0;
-    
-    if (Math.random() > baseProb) {
-      count = Math.floor(Math.random() * 5);
-      if (count > 0 && Math.random() > 0.8) count += 3; // occasional high activity
-    }
-    
-    data.push({
-      date: d.toISOString().split('T')[0],
-      count
-    });
-  }
-  return data;
-};
+import { useStreaks } from '@/hooks/useStreaks';
 
 export function StreakCalendar() {
-  const data = React.useMemo(() => generateMockHeatmap(), []);
+  const { activityMap } = useStreaks();
+
+  // Generate heatmap data using the actual activity map
+  const data = React.useMemo(() => {
+    const arr = [];
+    const today = new Date();
+    
+    for (let i = 104; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const dateStr = d.toISOString().split('T')[0];
+      
+      const count = activityMap[dateStr] || 0;
+      
+      arr.push({
+        date: dateStr,
+        count
+      });
+    }
+    return arr;
+  }, [activityMap]);
   
   // Group into columns of 7 days
   const weeks = [];
@@ -77,7 +71,6 @@ export function StreakCalendar() {
         <div className="flex gap-[6px] overflow-x-auto pb-2 scrollbar-hide">
           {weeks.map((week, weekIdx) => (
             <div key={weekIdx} className="flex flex-col gap-[6px]">
-              {/* Optional month labels could go here */}
               {weekIdx % 4 === 0 ? (
                  <div className="h-4 text-[10px] text-[var(--text-muted)] font-medium">
                    {new Date(week[0].date).toLocaleString('default', { month: 'short' })}
@@ -86,7 +79,7 @@ export function StreakCalendar() {
                 <div className="h-4"></div>
               )}
               
-              {week.map((day, dayIdx) => (
+              {week.map((day) => (
                 <div
                   key={day.date}
                   className={cn(

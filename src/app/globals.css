@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@plugin '@tailwindcss/typography';
 /* Custom CSS variables for the Axiom design system */
 :root {
   /* Core backgrounds */

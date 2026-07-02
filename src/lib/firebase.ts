@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, initializeFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,10 +11,19 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase only if it hasn't been initialized already (fixes Next.js hot reload issues)
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
-const db = getFirestore(app);
+
+// Initialize Firestore with long polling to prevent "client is offline" errors in Next.js Turbopack
+let db;
+try {
+  db = initializeFirestore(app, {
+    experimentalForceLongPolling: true
+  });
+} catch (e) {
+  // If already initialized by HMR, just grab the existing instance
+  db = getFirestore(app);
+}
 
 export { app, auth, db };

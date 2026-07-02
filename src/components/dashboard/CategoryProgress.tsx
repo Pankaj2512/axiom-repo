@@ -3,14 +3,35 @@
 import * as React from 'react';
 import { Card } from '@/components/ui/Card';
 import { ProgressBar } from '@/components/ui/ProgressBar';
+import { useProgress } from '@/hooks/useProgress';
+import { tracks } from '@/data/tracks';
+
+const TRACK_COLORS: Record<string, string> = {
+  sde2: 'var(--accent-primary)',
+  aiml: 'var(--success)',
+  fresher: 'var(--warning)',
+};
 
 export function CategoryProgress() {
-  const categories = [
-    { name: 'Data Structures & Algorithms', completed: 45, total: 150, color: 'var(--accent-primary)' },
-    { name: 'System Design (HLD & LLD)', completed: 12, total: 80, color: 'var(--accent-secondary)' },
-    { name: 'AI/ML Concepts', completed: 5, total: 60, color: 'var(--success)' },
-    { name: 'CS Fundamentals', completed: 20, total: 50, color: 'var(--warning)' },
-  ];
+  const { progress } = useProgress();
+
+  const categories = tracks.map(track => {
+    let total = 0;
+    track.modules.forEach(m => {
+      m.topics.forEach(t => {
+        total += t.items.length;
+      });
+    });
+
+    const completed = progress.filter(p => p.trackId === track.id && p.status === 'COMPLETED').length;
+
+    return {
+      name: track.name,
+      completed,
+      total,
+      color: TRACK_COLORS[track.id] || 'var(--accent-secondary)'
+    };
+  });
 
   return (
     <Card className="p-6">
@@ -21,12 +42,12 @@ export function CategoryProgress() {
 
       <div className="space-y-6">
         {categories.map((cat, idx) => {
-          const percentage = Math.round((cat.completed / cat.total) * 100);
+          const percentage = cat.total > 0 ? Math.round((cat.completed / cat.total) * 100) : 0;
           return (
             <div key={idx}>
               <div className="flex justify-between items-end mb-2">
-                <span className="text-sm font-medium text-[var(--text-primary)]">{cat.name}</span>
-                <span className="text-xs text-[var(--text-secondary)]">{cat.completed} / {cat.total} ({percentage}%)</span>
+                <span className="text-sm font-medium text-[var(--text-primary)] truncate pr-4">{cat.name}</span>
+                <span className="text-xs text-[var(--text-secondary)] whitespace-nowrap">{cat.completed} / {cat.total} ({percentage}%)</span>
               </div>
               <ProgressBar 
                 percentage={percentage} 

@@ -10,13 +10,17 @@ import { CustomList } from '@/types';
 import { Folder, Plus, List as ListIcon } from 'lucide-react';
 
 export default function ListsPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [lists, setLists] = React.useState<CustomList[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isEditorOpen, setIsEditorOpen] = React.useState(false);
 
   const fetchLists = React.useCallback(async () => {
-    if (!user) return;
+    if (loading) return;
+    if (!user) {
+      setIsLoading(false);
+      return;
+    }
     try {
       const data = await getUserCustomLists(user.uid);
       setLists(data.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()));
@@ -25,7 +29,7 @@ export default function ListsPage() {
     } finally {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [user, loading]);
 
   React.useEffect(() => {
     fetchLists();
