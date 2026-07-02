@@ -1,0 +1,121 @@
+import { Topic } from '@/types';
+
+export const dsaStriver450Topics: Topic[] = [
+  {
+    id: 'topic-arrays',
+    moduleId: 'mod-dsa',
+    name: 'Arrays',
+    description: 'Fundamental array operations and problem-solving patterns.',
+    order: 1,
+    items: [
+      { id: 'dsa-arr-1', topicId: 'topic-arrays', title: 'Find the Maximum Subarray Sum (Kadane\'s Algorithm)', difficulty: 'MEDIUM', type: 'QUESTION', order: 1 },
+      { id: 'dsa-arr-2', topicId: 'topic-arrays', title: 'Sort an array of 0s, 1s and 2s', difficulty: 'MEDIUM', type: 'QUESTION', order: 2 },
+      { id: 'dsa-arr-3', topicId: 'topic-arrays', title: 'Next Permutation', difficulty: 'MEDIUM', type: 'QUESTION', order: 3 },
+      { id: 'dsa-arr-4', topicId: 'topic-arrays', title: 'Stock Buy and Sell', difficulty: 'EASY', type: 'QUESTION', order: 4 },
+      { id: 'dsa-arr-5', topicId: 'topic-arrays', title: 'Rotate Matrix by 90 degrees', difficulty: 'MEDIUM', type: 'QUESTION', order: 5 },
+      { id: 'dsa-arr-6', topicId: 'topic-arrays', title: 'Merge Overlapping Intervals', difficulty: 'MEDIUM', type: 'QUESTION', order: 6 },
+      { id: 'dsa-arr-7', topicId: 'topic-arrays', title: 'Set Matrix Zeroes', difficulty: 'MEDIUM', type: 'QUESTION', order: 7 },
+      { id: 'dsa-arr-8', topicId: 'topic-arrays', title: 'Pascal\'s Triangle', difficulty: 'EASY', type: 'QUESTION', order: 8 },
+      { id: 'dsa-arr-9', topicId: 'topic-arrays', title: 'Majority Element (>N/2 times)', difficulty: 'EASY', type: 'QUESTION', order: 9 },
+      { id: 'dsa-arr-10', topicId: 'topic-arrays', title: 'Majority Element (>N/3 times)', difficulty: 'MEDIUM', type: 'QUESTION', order: 10 },
+      { id: 'dsa-arr-11', topicId: 'topic-arrays', title: 'Find Duplicate Number in Array', difficulty: 'MEDIUM', type: 'QUESTION', order: 11 },
+      { id: 'dsa-arr-12', topicId: 'topic-arrays', title: 'Merge two sorted Arrays without extra space', difficulty: 'HARD', type: 'QUESTION', order: 12 },
+      { id: 'dsa-arr-13', topicId: 'topic-arrays', title: 'Count Inversions', difficulty: 'HARD', type: 'QUESTION', order: 13 },
+      { id: 'dsa-arr-14', topicId: 'topic-arrays', title: 'Longest Consecutive Sequence', difficulty: 'MEDIUM', type: 'QUESTION', order: 14 },
+      { id: 'dsa-arr-15', topicId: 'topic-arrays', title: 'Pow(x, n)', difficulty: 'MEDIUM', type: 'QUESTION', order: 15 },
+    ]
+  },
+  {
+    id: 'topic-ll',
+    moduleId: 'mod-dsa',
+    name: 'Linked List',
+    description: 'Singly, doubly, and circular linked lists.',
+    order: 2,
+    items: [
+      { id: 'dsa-ll-1', topicId: 'topic-ll', title: 'Reverse a Linked List', difficulty: 'EASY', type: 'QUESTION', order: 1 },
+      { id: 'dsa-ll-2', topicId: 'topic-ll', title: 'Find Middle of Linked List', difficulty: 'EASY', type: 'QUESTION', order: 2 },
+      { id: 'dsa-ll-3', topicId: 'topic-ll', title: 'Merge Two Sorted Linked Lists', difficulty: 'EASY', type: 'QUESTION', order: 3 },
+      { id: 'dsa-ll-4', topicId: 'topic-ll', title: 'Remove N-th node from back of LL', difficulty: 'MEDIUM', type: 'QUESTION', order: 4 },
+      { id: 'dsa-ll-5', topicId: 'topic-ll', title: 'Add two numbers as LinkedList', difficulty: 'MEDIUM', type: 'QUESTION', order: 5 },
+      { id: 'dsa-ll-6', topicId: 'topic-ll', title: 'Detect a cycle in Linked List', difficulty: 'EASY', type: 'QUESTION', order: 6 },
+      { id: 'dsa-ll-7', topicId: 'topic-ll', title: 'Find the starting point of the Loop of LL', difficulty: 'MEDIUM', type: 'QUESTION', order: 7 },
+      { id: 'dsa-ll-8', topicId: 'topic-ll', title: 'Check if LL is palindrome', difficulty: 'EASY', type: 'QUESTION', order: 8 },
+      { id: 'dsa-ll-9', topicId: 'topic-ll', title: 'Flatten a Linked List', difficulty: 'MEDIUM', type: 'QUESTION', order: 9 },
+      { id: 'dsa-ll-10', topicId: 'topic-ll', title: 'Rotate a LinkedList', difficulty: 'MEDIUM', type: 'QUESTION', order: 10 },
+    ]
+  },
+  {
+    id: 'topic-trees',
+    moduleId: 'mod-dsa',
+    name: 'Binary Trees',
+    description: 'Tree traversals, properties, and modifications.',
+    order: 3,
+    items: [
+      { id: 'dsa-tree-1', topicId: 'topic-trees', title: 'Inorder Traversal', difficulty: 'EASY', type: 'QUESTION', order: 1 },
+      { id: 'dsa-tree-2', topicId: 'topic-trees', title: 'Preorder Traversal', difficulty: 'EASY', type: 'QUESTION', order: 2 },
+      { id: 'dsa-tree-3', topicId: 'topic-trees', title: 'Postorder Traversal', difficulty: 'EASY', type: 'QUESTION', order: 3 },
+      { id: 'dsa-tree-4', topicId: 'topic-trees', title: 'Level Order Traversal', difficulty: 'MEDIUM', type: 'QUESTION', order: 4 },
+      { id: 'dsa-tree-5', topicId: 'topic-trees', title: 'Maximum Depth of Binary Tree', difficulty: 'EASY', type: 'QUESTION', order: 5 },
+      { id: 'dsa-tree-6', topicId: 'topic-trees', title: 'Check if Binary Tree is Balanced', difficulty: 'EASY', type: 'QUESTION', order: 6 },
+      { id: 'dsa-tree-7', topicId: 'topic-trees', title: 'Diameter of Binary Tree', difficulty: 'EASY', type: 'QUESTION', order: 7 },
+      { id: 'dsa-tree-8', topicId: 'topic-trees', title: 'Check if two trees are Identical', difficulty: 'EASY', type: 'QUESTION', order: 8 },
+      { id: 'dsa-tree-9', topicId: 'topic-trees', title: 'Zigzag Traversal of Binary Tree', difficulty: 'MEDIUM', type: 'QUESTION', order: 9 },
+      { id: 'dsa-tree-10', topicId: 'topic-trees', title: 'Boundary Traversal of Binary Tree', difficulty: 'MEDIUM', type: 'QUESTION', order: 10 },
+    ]
+  },
+  {
+    id: 'topic-dp',
+    moduleId: 'mod-dsa',
+    name: 'Dynamic Programming',
+    description: 'Memoization and tabulation techniques.',
+    order: 4,
+    items: [
+      { id: 'dsa-dp-1', topicId: 'topic-dp', title: 'Climbing Stairs', difficulty: 'EASY', type: 'QUESTION', order: 1 },
+      { id: 'dsa-dp-2', topicId: 'topic-dp', title: 'Frog Jump', difficulty: 'EASY', type: 'QUESTION', order: 2 },
+      { id: 'dsa-dp-3', topicId: 'topic-dp', title: 'Maximum Sum of Non-Adjacent Elements', difficulty: 'MEDIUM', type: 'QUESTION', order: 3 },
+      { id: 'dsa-dp-4', topicId: 'topic-dp', title: 'House Robber', difficulty: 'MEDIUM', type: 'QUESTION', order: 4 },
+      { id: 'dsa-dp-5', topicId: 'topic-dp', title: '0/1 Knapsack', difficulty: 'MEDIUM', type: 'QUESTION', order: 5 },
+      { id: 'dsa-dp-6', topicId: 'topic-dp', title: 'Longest Common Subsequence', difficulty: 'MEDIUM', type: 'QUESTION', order: 6 },
+      { id: 'dsa-dp-7', topicId: 'topic-dp', title: 'Longest Increasing Subsequence', difficulty: 'MEDIUM', type: 'QUESTION', order: 7 },
+      { id: 'dsa-dp-8', topicId: 'topic-dp', title: 'Edit Distance', difficulty: 'HARD', type: 'QUESTION', order: 8 },
+      { id: 'dsa-dp-9', topicId: 'topic-dp', title: 'Coin Change', difficulty: 'MEDIUM', type: 'QUESTION', order: 9 },
+      { id: 'dsa-dp-10', topicId: 'topic-dp', title: 'Minimum Path Sum', difficulty: 'MEDIUM', type: 'QUESTION', order: 10 },
+      { id: 'dsa-dp-11', topicId: 'topic-dp', title: 'Unique Paths', difficulty: 'MEDIUM', type: 'QUESTION', order: 11 },
+      { id: 'dsa-dp-12', topicId: 'topic-dp', title: 'Partition Equal Subset Sum', difficulty: 'MEDIUM', type: 'QUESTION', order: 12 },
+      { id: 'dsa-dp-13', topicId: 'topic-dp', title: 'Rod Cutting Problem', difficulty: 'MEDIUM', type: 'QUESTION', order: 13 },
+      { id: 'dsa-dp-14', topicId: 'topic-dp', title: 'Matrix Chain Multiplication', difficulty: 'HARD', type: 'QUESTION', order: 14 },
+      { id: 'dsa-dp-15', topicId: 'topic-dp', title: 'Word Break', difficulty: 'MEDIUM', type: 'QUESTION', order: 15 },
+    ]
+  },
+  {
+    id: 'topic-graphs',
+    moduleId: 'mod-dsa',
+    name: 'Graphs',
+    description: 'Graph representations and traversal algorithms.',
+    order: 5,
+    items: [
+      { id: 'dsa-graph-1', topicId: 'topic-graphs', title: 'BFS Traversal', difficulty: 'EASY', type: 'QUESTION', order: 1 },
+      { id: 'dsa-graph-2', topicId: 'topic-graphs', title: 'DFS Traversal', difficulty: 'EASY', type: 'QUESTION', order: 2 },
+      { id: 'dsa-graph-3', topicId: 'topic-graphs', title: 'Number of Islands', difficulty: 'MEDIUM', type: 'QUESTION', order: 3 },
+      { id: 'dsa-graph-4', topicId: 'topic-graphs', title: 'Detect Cycle in Undirected Graph', difficulty: 'MEDIUM', type: 'QUESTION', order: 4 },
+      { id: 'dsa-graph-5', topicId: 'topic-graphs', title: 'Detect Cycle in Directed Graph', difficulty: 'MEDIUM', type: 'QUESTION', order: 5 },
+      { id: 'dsa-graph-6', topicId: 'topic-graphs', title: 'Topological Sort', difficulty: 'MEDIUM', type: 'QUESTION', order: 6 },
+      { id: 'dsa-graph-7', topicId: 'topic-graphs', title: 'Dijkstra\'s Algorithm', difficulty: 'MEDIUM', type: 'QUESTION', order: 7 },
+      { id: 'dsa-graph-8', topicId: 'topic-graphs', title: 'Bellman Ford Algorithm', difficulty: 'MEDIUM', type: 'QUESTION', order: 8 },
+    ]
+  },
+  {
+    id: 'topic-stacks',
+    moduleId: 'mod-dsa',
+    name: 'Stacks & Queues',
+    description: 'LIFO and FIFO data structures.',
+    order: 6,
+    items: [
+      { id: 'dsa-stack-1', topicId: 'topic-stacks', title: 'Valid Parentheses', difficulty: 'EASY', type: 'QUESTION', order: 1 },
+      { id: 'dsa-stack-2', topicId: 'topic-stacks', title: 'Next Greater Element', difficulty: 'MEDIUM', type: 'QUESTION', order: 2 },
+      { id: 'dsa-stack-3', topicId: 'topic-stacks', title: 'Implement Stack using Queues', difficulty: 'EASY', type: 'QUESTION', order: 3 },
+      { id: 'dsa-stack-4', topicId: 'topic-stacks', title: 'LRU Cache', difficulty: 'MEDIUM', type: 'QUESTION', order: 4 },
+      { id: 'dsa-stack-5', topicId: 'topic-stacks', title: 'Largest Rectangle in Histogram', difficulty: 'HARD', type: 'QUESTION', order: 5 },
+    ]
+  }
+];

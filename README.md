@@ -1,34 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Axiom — Crack Your Dream Role 🚀
+
+An AI-powered preparation platform for engineers targeting **SDE 2**, **Senior AI/ML**, and **Fresher SDE** roles at top-tier companies.
+
+## Features
+
+### Phase 1 (Current)
+- 📊 **Dashboard** — Track progress, streaks, and daily analytics
+- 📚 **Multi-track Syllabus** — DSA (Striver 450), HLD, LLD, CS Fundamentals
+- 🔄 **Spaced Repetition** — SM-2 algorithm with weekly revision days
+- 📝 **Notes & Solutions** — Save code, notes, and complexity analysis per question
+- 📋 **Custom Lists** — Create personal question lists ("Mock Failures", "Must Revise")
+- 🔥 **Streak Tracking** — GitHub-style activity heatmap
+- 🔐 **Auth** — Google + GitHub sign-in via Firebase
+
+### Coming Soon
+- 🤖 **AI Mentor** — Gemini-powered study assistant with RAG
+- 🔮 **Forecaster** — Smart timeline prediction based on pace & target
+- 🧪 **Mock Interviews** — AI-simulated technical interviews
+- 📊 **Code Review Agent** — Automated solution analysis
+
+## Tech Stack
+
+- **Framework:** Next.js 15 (App Router) + TypeScript
+- **Styling:** Tailwind CSS + Custom Design System
+- **Auth/DB:** Firebase (Auth + Firestore)
+- **AI:** Gemini API + Firebase Vector Search
+- **Icons:** Lucide React
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your Firebase config
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-## Learn More
+Copy `.env.example` to `.env.local` and fill in your Firebase configuration:
 
-To learn more about Next.js, take a look at the following resources:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT © Pankaj Kumar
