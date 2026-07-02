@@ -4,6 +4,7 @@ import * as React from 'react';
 import { StatsGrid } from '@/components/dashboard/StatsGrid';
 import { StreakCalendar } from '@/components/dashboard/StreakCalendar';
 import { CategoryProgress } from '@/components/dashboard/CategoryProgress';
+import { StudyForecaster } from '@/components/analytics/StudyForecaster';
 
 export default function DashboardPage() {
   return (
@@ -20,10 +21,11 @@ export default function DashboardPage() {
 
       {/* Middle Grid */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-2 space-y-8">
           <StreakCalendar />
         </div>
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 space-y-8">
+          <StudyForecaster />
           <CategoryProgress />
         </div>
       </section>

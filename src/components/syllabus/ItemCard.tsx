@@ -1,9 +1,12 @@
 'use client';
 
-import { Item } from '@/types';
+import * as React from 'react';
+import { Item, CustomList } from '@/types';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, BookmarkPlus } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { getUserCustomLists, addToList } from '@/lib/firestore';
 
 interface ItemCardProps {
   item: Item;
@@ -19,6 +22,28 @@ const itemTypeIcons: Record<string, string> = {
 };
 
 export function ItemCard({ item }: ItemCardProps) {
+  const { user } = useAuth();
+  const [lists, setLists] = React.useState<CustomList[]>([]);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (user && isDropdownOpen) {
+      getUserCustomLists(user.uid).then(setLists).catch(console.error);
+    }
+  }, [user, isDropdownOpen]);
+
+  const handleSaveToList = async (listId: string) => {
+    if (!user) return;
+    try {
+      await addToList(user.uid, listId, item.id);
+      setIsDropdownOpen(false);
+      alert('Saved to list!');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to save to list');
+    }
+  };
+
   const typeEmoji = itemTypeIcons[item.type] || '📌';
   const difficultyVariant = item.difficulty?.toLowerCase() as any;
 
@@ -35,17 +60,49 @@ export function ItemCard({ item }: ItemCardProps) {
             {item.title}
           </p>
         </div>
-        {item.externalUrl && (
-          <a
-            href={item.externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-shrink-0 p-1.5 rounded hover:bg-[var(--surface-hover)] transition-colors"
-            title="Open external link"
+        {/* Actions */}
+        <div className="flex flex-shrink-0 items-center gap-1 relative">
+          <button
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="p-1.5 rounded hover:bg-[var(--surface-hover)] transition-colors text-gray-400 hover:text-white"
+            title="Save to list"
           >
-            <ExternalLink className="w-4 h-4 text-[var(--accent-secondary)]" />
-          </a>
-        )}
+            <BookmarkPlus className="w-4 h-4" />
+          </button>
+
+          {isDropdownOpen && (
+            <div className="absolute right-0 top-8 w-48 bg-[var(--bg-secondary)] border border-white/10 rounded-lg shadow-xl z-10 overflow-hidden animate-in fade-in slide-in-from-top-2">
+              <div className="p-2 border-b border-white/5 text-xs text-gray-400">Save to list...</div>
+              <div className="max-h-48 overflow-y-auto">
+                {lists.length === 0 ? (
+                  <div className="p-3 text-xs text-center text-gray-500">No lists found. Create one first!</div>
+                ) : (
+                  lists.map(list => (
+                    <button
+                      key={list.id}
+                      onClick={() => handleSaveToList(list.id)}
+                      className="w-full text-left px-3 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors truncate"
+                    >
+                      {list.name}
+                    </button>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+
+          {item.externalUrl && (
+            <a
+              href={item.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded hover:bg-[var(--surface-hover)] transition-colors"
+              title="Open external link"
+            >
+              <ExternalLink className="w-4 h-4 text-[var(--accent-secondary)]" />
+            </a>
+          )}
+        </div>
       </div>
 
       {/* Badges */}

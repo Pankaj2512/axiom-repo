@@ -7,10 +7,13 @@ import {
   query, 
   where, 
   getDocs,
-  Timestamp 
+  Timestamp,
+  deleteDoc,
+  arrayUnion,
+  arrayRemove
 } from 'firebase/firestore';
 import { db } from './firebase';
-import type { UserProfile, UserProgress, RevisionCard, CustomList } from '@/types';
+import type { UserProfile, UserProgress, RevisionCard, CustomList, UserNote } from '@/types';
 
 // ==========================================
 // USER PROFILE
@@ -125,4 +128,66 @@ export const createCustomList = async (uid: string, listId: string, data: Partia
     updatedAt: new Date(),
     ...data
   });
+};
+
+export const getUserCustomLists = async (uid: string): Promise<CustomList[]> => {
+  const listsRef = collection(db, 'users', uid, 'custom_lists');
+  const q = query(listsRef);
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => doc.data() as CustomList);
+};
+
+export const addToList = async (uid: string, listId: string, itemId: string) => {
+  const listRef = doc(db, 'users', uid, 'custom_lists', listId);
+  await updateDoc(listRef, {
+    itemIds: arrayUnion(itemId),
+    updatedAt: new Date()
+  });
+};
+
+export const removeFromList = async (uid: string, listId: string, itemId: string) => {
+  const listRef = doc(db, 'users', uid, 'custom_lists', listId);
+  await updateDoc(listRef, {
+    itemIds: arrayRemove(itemId),
+    updatedAt: new Date()
+  });
+};
+
+// ==========================================
+// NOTES (Subcollection)
+// ==========================================
+
+export const createNote = async (uid: string, title: string, content: string, topicId?: string): Promise<string> => {
+  const notesRef = collection(db, 'users', uid, 'notes');
+  const newNoteRef = doc(notesRef);
+  await setDoc(newNoteRef, {
+    id: newNoteRef.id,
+    userId: uid,
+    title,
+    content,
+    topicId: topicId || null,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
+  });
+  return newNoteRef.id;
+};
+
+export const updateNote = async (uid: string, noteId: string, title: string, content: string) => {
+  const noteRef = doc(db, 'users', uid, 'notes', noteId);
+  await updateDoc(noteRef, {
+    title,
+    content,
+    updatedAt: Date.now()
+  });
+};
+
+export const getUserNotes = async (uid: string): Promise<UserNote[]> => {
+  const notesRef = collection(db, 'users', uid, 'notes');
+  const q = query(notesRef);
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map(doc => doc.data() as UserNote);
+};
+
+export const deleteNote = async (uid: string, noteId: string) => {
+  await deleteDoc(doc(db, 'users', uid, 'notes', noteId));
 };

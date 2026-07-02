@@ -128,3 +128,13 @@ export interface CategoryStat {
   percentage: number;
   color: string;
 }
+
+export interface UserNote {
+  id: string;
+  userId: string;
+  topicId?: string;
+  title: string;
+  content: string;
+  createdAt: number;
+  updatedAt: number;
+}

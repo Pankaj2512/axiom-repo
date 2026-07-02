@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { SummaryGenerator } from '@/components/ai/SummaryGenerator';
 import { Brain, CheckCircle2, XCircle, ChevronRight, HelpCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { calculateNextReview, createNewRevisionCard } from '@/lib/spacedRepetition';
@@ -72,6 +73,8 @@ export default function RevisionPage() {
           <Brain className="w-6 h-6 text-[var(--accent-primary)]" />
         </div>
       </div>
+
+      <SummaryGenerator topicName="Data Structures / General Revision" />
 
       <Card className="min-h-[400px] flex flex-col items-center justify-center p-8 text-center bg-[var(--bg-secondary)]/50 backdrop-blur border border-white/5 relative overflow-hidden group">
         {/* Glow effect */}

@@ -8,13 +8,14 @@ import * as LucideIcons from 'lucide-react';
 import { ArrowLeft } from 'lucide-react';
 
 interface TrackDetailPageProps {
-  params: {
+  params: Promise<{
     trackId: string;
-  };
+  }>;
 }
 
-export function generateMetadata({ params }: TrackDetailPageProps): Metadata {
-  const track = tracks.find((t) => t.id === params.trackId);
+export async function generateMetadata({ params }: TrackDetailPageProps): Promise<Metadata> {
+  const { trackId } = await params;
+  const track = tracks.find((t) => t.id === trackId);
   return {
     title: `${track?.name || 'Track'} | Axiom`,
     description: track?.description,
@@ -27,8 +28,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function TrackDetailPage({ params }: TrackDetailPageProps) {
-  const track = tracks.find((t) => t.id === params.trackId);
+export default async function TrackDetailPage({ params }: TrackDetailPageProps) {
+  const { trackId } = await params;
+  const track = tracks.find((t) => t.id === trackId);
 
   if (!track) {
     notFound();

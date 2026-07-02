@@ -3,19 +3,21 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { TopicList } from '@/components/syllabus/TopicList';
 import { Button } from '@/components/ui/Button';
+import { MentorChat } from '@/components/ai/MentorChat';
 import { tracks } from '@/data/tracks';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, MessageCircle } from 'lucide-react';
 
 interface ModuleDetailPageProps {
-  params: {
+  params: Promise<{
     trackId: string;
     moduleId: string;
-  };
+  }>;
 }
 
-export function generateMetadata({ params }: ModuleDetailPageProps): Metadata {
-  const track = tracks.find((t) => t.id === params.trackId);
-  const module = track?.modules.find((m) => m.id === params.moduleId);
+export async function generateMetadata({ params }: ModuleDetailPageProps): Promise<Metadata> {
+  const { trackId, moduleId } = await params;
+  const track = tracks.find((t) => t.id === trackId);
+  const module = track?.modules.find((m) => m.id === moduleId);
   return {
     title: `${module?.name || 'Module'} | Axiom`,
     description: module?.description,
@@ -35,14 +37,15 @@ export function generateStaticParams() {
   return params;
 }
 
-export default function ModuleDetailPage({ params }: ModuleDetailPageProps) {
-  const track = tracks.find((t) => t.id === params.trackId);
+export default async function ModuleDetailPage({ params }: ModuleDetailPageProps) {
+  const { trackId, moduleId } = await params;
+  const track = tracks.find((t) => t.id === trackId);
 
   if (!track) {
     notFound();
   }
 
-  const module = track.modules.find((m) => m.id === params.moduleId);
+  const module = track.modules.find((m) => m.id === moduleId);
 
   if (!module) {
     notFound();
@@ -91,6 +94,27 @@ export default function ModuleDetailPage({ params }: ModuleDetailPageProps) {
           <TopicList topics={sortedTopics} />
         </>
       )}
+
+      {/* Floating AI Mentor */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4">
+        <details className="group relative">
+          <summary className="list-none cursor-pointer">
+            <div className="w-14 h-14 bg-[var(--accent-primary)] rounded-full shadow-lg shadow-[var(--accent-primary)]/20 flex items-center justify-center hover:scale-110 transition-transform">
+              <MessageCircle className="w-6 h-6 text-white" />
+            </div>
+          </summary>
+          <div className="absolute bottom-20 right-0 w-[400px] origin-bottom-right animate-in zoom-in-95 duration-200">
+            <MentorChat 
+              contextTopic={module.name} 
+              onClose={() => {
+                // Find the details element and remove the 'open' attribute
+                const details = document.querySelector('details.group') as HTMLDetailsElement;
+                if (details) details.open = false;
+              }}
+            />
+          </div>
+        </details>
+      </div>
     </div>
   );
 }
