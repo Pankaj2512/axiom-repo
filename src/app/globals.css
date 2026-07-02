@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+
+/* Custom CSS variables for the Axiom design system */
+:root {
+  /* Core backgrounds */
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #12121A;
+  --bg-elevated: #1A1A25;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  
+  /* Brand */
+  --accent-primary: #6C5CE7;
+  --accent-primary-hover: #7C6DF7;
+  --accent-secondary: #00D2FF;
+  
+  /* Semantic */
+  --success: #00E676;
+  --warning: #FFB74D;
+  --error: #FF5252;
+  --info: #448AFF;
+  
+  /* Text */
+  --text-primary: #EAEAEA;
+  --text-secondary: #8B8B9E;
+  --text-muted: #5A5A6E;
+  
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  
+  /* Misc */
+  --sidebar-width: 260px;
+  --header-height: 64px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+::selection {
+  background-color: rgba(108, 92, 231, 0.3);
+  color: #fff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-hover);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Glass Card Utility */
+.glass-card {
+  background: var(--bg-secondary);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+}
+.glass-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+/* Progress bar animation */
+.progress-fill {
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
