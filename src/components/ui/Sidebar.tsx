@@ -3,16 +3,10 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LayoutDashboard, BookOpen, Code2, Brain, ListChecks, FileText, Settings, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import {
-  LayoutDashboard,
-  BookOpen,
-  Code2,
-  Brain,
-  ListChecks,
-  FileText,
-  Settings
-} from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { signOut } from '@/lib/auth';
 
 const NAV_ITEMS = [
   { label: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -26,6 +20,7 @@ const NAV_ITEMS = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { user } = useAuth();
 
   return (
     <aside className="fixed left-0 top-0 h-screen w-[var(--sidebar-width)] border-r border-[var(--border)] bg-[var(--bg-secondary)] flex flex-col">
@@ -65,17 +60,30 @@ export function Sidebar() {
         })}
       </nav>
 
-      {/* User Section (Mock) */}
+      {/* User Section */}
       <div className="p-4 border-t border-[var(--border)]">
-        <div className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-[var(--surface-hover)] transition-colors cursor-pointer">
-          <div className="w-8 h-8 rounded-full bg-[var(--surface)] flex items-center justify-center text-xs font-medium text-[var(--text-secondary)] border border-[var(--border)]">
-            PK
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full bg-[var(--surface-hover)] border border-[var(--border)] flex items-center justify-center overflow-hidden">
+            {user?.photoURL ? (
+              <img src={user.photoURL} alt="Avatar" className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-[var(--text-secondary)] font-medium text-sm">
+                {user?.displayName ? user.displayName.charAt(0).toUpperCase() : 'U'}
+              </span>
+            )}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-[var(--text-primary)] truncate">Pankaj Kumar</p>
-            <p className="text-xs text-[var(--text-muted)] truncate">Target: SDE 2</p>
+          <div className="flex-1 overflow-hidden">
+            <p className="text-sm font-medium text-[var(--text-primary)] truncate">{user?.displayName || 'User'}</p>
+            <p className="text-xs text-[var(--text-secondary)] truncate">{user?.email || 'Loading...'}</p>
           </div>
         </div>
+        <button 
+          onClick={() => signOut()}
+          className="w-full flex items-center gap-3 px-3 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] rounded-md transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          <span>Sign Out</span>
+        </button>
       </div>
     </aside>
   );

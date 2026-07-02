@@ -1,4 +1,8 @@
 import { Track } from '@/types';
+import { dsaStriver450Topics } from './dsa-striver450';
+import { hldTopics } from './hld-topics';
+import { lldTopics } from './lld-problems';
+import { csFundamentalsTopics } from './cs-fundamentals';
 
 export const tracks: Track[] = [
   {
@@ -14,7 +18,7 @@ export const tracks: Track[] = [
         name: 'Data Structures & Algorithms',
         description: 'Advanced DSA and problem-solving patterns.',
         order: 1,
-        topics: [] // Will be populated from dsa-striver450.ts
+        topics: dsaStriver450Topics
       },
       {
         id: 'mod-hld',
@@ -22,7 +26,7 @@ export const tracks: Track[] = [
         name: 'High-Level Design (HLD)',
         description: 'Scalable system architecture and real-world case studies.',
         order: 2,
-        topics: [] // Will be populated from hld-topics.ts
+        topics: hldTopics
       },
       {
         id: 'mod-lld',
@@ -30,7 +34,7 @@ export const tracks: Track[] = [
         name: 'Low-Level Design (LLD)',
         description: 'Object-Oriented Design, SOLID principles, and Design Patterns.',
         order: 3,
-        topics: [] // Will be populated from lld-problems.ts
+        topics: lldTopics
       }
     ]
   },
@@ -96,7 +100,7 @@ export const tracks: Track[] = [
         name: 'CS Fundamentals',
         description: 'OS, OOP, Computer Networks, and DBMS.',
         order: 2,
-        topics: [] // Will be populated from cs-fundamentals.ts
+        topics: csFundamentalsTopics
       }
     ]
   }
