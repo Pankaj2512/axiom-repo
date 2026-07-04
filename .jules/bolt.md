@@ -1,0 +1,3 @@
+## 2024-07-04 - Static Array Deep Traversal Overhead
+**Learning:** React components were repeatedly calling `.reduce` on a large nested static array (`tracks` containing thousands of objects) on every render cycle to compute total items. This caused unnecessary synchronous work during renders for values that literally never change at runtime.
+**Action:** When a codebase features large, read-only static configuration arrays (like syllabus trees or item lists), pre-calculate aggregate metrics statically alongside the data definitions and export those constants, avoiding O(N) recalculation during React component render cycles.
