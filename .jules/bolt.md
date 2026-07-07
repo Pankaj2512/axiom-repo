@@ -1,0 +1,3 @@
+## 2024-07-07 - Redundant DB Calls in Dashboard Components
+**Learning:** Child components on a dashboard (like `StudyForecaster`) can unknowingly trigger duplicate Firestore queries if they fetch data independently instead of utilizing an existing context provider (`ProgressContext`). Additionally, time fields in Firestore can return as either JS `Date` objects or `Timestamp` objects depending on optimistic updates vs network fetches.
+**Action:** When a global provider exists for data (like `useProgress`), use it in all dashboard components instead of making independent queries to reduce read operations. Always normalize timestamps when comparing dates to avoid runtime crashes.
