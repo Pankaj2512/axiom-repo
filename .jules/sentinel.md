@@ -1,0 +1,4 @@
+## 2024-07-09 - Fix Error Details Exposure in API Routes
+**Vulnerability:** API routes and auth functions returning `error.message` directly in 500 responses to the client.
+**Learning:** Returning detailed error messages (like those from Gemini API or internal Firebase errors) can leak internal state, credentials, pathing info, or implementation details to potentially malicious clients.
+**Prevention:** In catch blocks that return API responses, log the actual error securely on the server using `console.error` for debugging, but return a generic string (e.g. `An internal server error occurred`) to the client.
