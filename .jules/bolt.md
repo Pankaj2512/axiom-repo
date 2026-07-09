@@ -1,0 +1,3 @@
+## 2024-07-09 - Avoid O(N) calculations in React client components for static data
+**Learning:** React client components like `StatsGrid.tsx` and `StudyForecaster.tsx` were recalculating the total number of syllabus items on every render. Because the syllabus data (`tracks.ts`) is static across the lifetime of the application, computing these totals inline causes unnecessary CPU cycles on every render, which gets worse as the syllabus grows.
+**Action:** Move static data reductions out of React component render cycles and pre-compute them once at initialization (e.g., exporting `TOTAL_ITEMS_COUNT` from `tracks.ts`).
