@@ -1,0 +1,3 @@
+## 2024-05-24 - Pre-computing Static Application Data to Prevent React Cascades
+**Learning:** React components (`StatsGrid`, `StudyForecaster`, `CategoryProgress`) were performing expensive O(N) nested loop array reductions to calculate total item counts on every single render. Since this is static application data sourced directly from local config files, these values never change during the lifecycle of the client session.
+**Action:** Always pre-compute static nested array aggregations directly at the data layer (`export const TOTAL_SYLLABUS_ITEMS = ...`) instead of calculating them inline inside React renders. This changes O(N) operations to O(1) lookups and significantly reduces JavaScript execution time during hydration and updates.
