@@ -1,0 +1,17 @@
+
+> axiom-prep@0.1.0 dev /app
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 539ms
+
+○ Compiling /syllabus/[trackId]/[moduleId] ...
+ GET /syllabus/system-design/architecture 200 in 6.3s (next.js: 5.7s, generate-params: 621ms, application-code: 627ms)
+ GET /login 200 in 2.0s (next.js: 1899ms, application-code: 122ms)
+ GET /syllabus/sde2/mod-dsa 200 in 291ms (next.js: 33ms, generate-params: 28ms, application-code: 257ms)
+ GET /login 200 in 40ms (next.js: 4ms, application-code: 36ms)
+ GET /syllabus/sde2/mod-dsa 200 in 222ms (next.js: 38ms, generate-params: 29ms, application-code: 183ms)
+ GET /login 200 in 47ms (next.js: 4ms, application-code: 43ms)
