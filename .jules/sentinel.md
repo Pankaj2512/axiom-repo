@@ -1,0 +1,4 @@
+## 2024-07-13 - [Fix Information Disclosure via Error Messages]
+**Vulnerability:** API endpoints and authentication functions were catching errors of type `any` and directly returning or leaking the `error.message` to the client. This risks exposing sensitive internal server paths, unhandled backend exceptions, or implementation details.
+**Learning:** Returning unhandled exception messages directly to the client can inadvertently leak stack traces, database schema details, or other critical internal server state if backend APIs or downstream services fail unpredictably. The application was consistently doing this for AI and Auth logic.
+**Prevention:** Always catch errors as `unknown`, log the full actual error object securely on the backend (e.g., via `console.error`), and return a generic, sanitized error string to the client. Ensure no raw error details are exposed unless explicitly needed and safe to do so.
