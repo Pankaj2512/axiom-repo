@@ -1,0 +1,3 @@
+## 2024-07-13 - Static Data Pre-computation in Dashboard
+**Learning:** Multiple dashboard components (`StatsGrid`, `CategoryProgress`, `StudyForecaster`) were repeatedly iterating through deeply nested static arrays (tracks -> modules -> topics -> items) on every render to calculate total items. This caused O(N) operations per component per render cycle, where N is the total number of topics.
+**Action:** Always pre-calculate global statistics or derivations for large static data objects at module load time (in this case, inside `src/data/tracks.ts`), and export those computed constants so React components can simply read an O(1) value during render.
