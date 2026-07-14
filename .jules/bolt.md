@@ -1,0 +1,3 @@
+## 2024-05-24 - Pre-compute Static Syllabus Size
+**Learning:** Static track size calculation using deeply nested `.reduce` operations happens frequently on the client side (e.g. `StatsGrid.tsx`, `StudyForecaster.tsx`). While not a huge bottleneck right now, computing the total number of items from the static `tracks` list repeatedly is unnecessary and scales linearly with syllabus additions. Memory notes that "Static application data (like syllabus tracks) is stored in `src/data/` and can be pre-computed at initialization to optimize React renders."
+**Action:** Pre-compute the total items count directly in `src/data/tracks.ts` and export it, replacing `tracks.reduce()` calls in components with `TOTAL_TRACK_ITEMS`.
