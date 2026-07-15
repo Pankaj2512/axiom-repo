@@ -1,0 +1,3 @@
+## 2024-11-20 - Pre-compute Static Data Reductions
+**Learning:** Static data computations (like reducing a deeply nested static array `tracks.reduce`) shouldn't happen inside component renders or hooks because the result is deterministic and identical every time. In this Next.js app, static data in `src/data/` (like syllabus tracks) was being reduced inside `React.useEffect` and render bodies (`StatsGrid.tsx` and `StudyForecaster.tsx`), causing unnecessary CPU cycles on every render/mount.
+**Action:** Pre-compute deterministic static data properties at the module level (e.g., exporting `TOTAL_TRACK_ITEMS` directly from `src/data/tracks.ts`) and import the constant instead of repeatedly calculating it inside React components.
