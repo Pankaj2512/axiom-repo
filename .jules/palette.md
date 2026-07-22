@@ -1,0 +1,3 @@
+## 2024-07-22 - Missing ARIA Attributes on Custom Modals
+**Learning:** Custom modal components built as overlays lack inherent structural accessibility. Screen readers require explicit `role="dialog"`, `aria-modal="true"`, and an `aria-labelledby` linking to a heading to properly contextualize the trapped focus and content. Close buttons without text must have `aria-label`.
+**Action:** When creating or reviewing custom portal/overlay components, explicitly check for `role`, `aria-modal`, labels linking to IDs, and ensure that visually hidden icon buttons have `aria-label` and visible focus states via `focus-visible` ring utilities.
