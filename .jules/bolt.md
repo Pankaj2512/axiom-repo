@@ -1,0 +1,3 @@
+## 2024-07-26 - Context-Induced O(N) Re-renders
+**Learning:** In a dashboard where multiple independent context hooks (e.g., `useProgress`, `useStreaks`, `useRevisionQueue`) are consumed in a single component, an update to *any* of those contexts will trigger a re-render of the entire component. If that component performs expensive array reductions (like nested loops over static application data or filtering large progress arrays based on dates), those O(N) operations will run needlessly.
+**Action:** When a component calculates derived state from large arrays or static data and also consumes multiple contexts, always wrap the heavy computations in `React.useMemo` to isolate them from unrelated state updates.
