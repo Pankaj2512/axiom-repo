@@ -1,0 +1,3 @@
+## $(date +%Y-%m-%d) - Hooks Order and Conditional Rendering
+**Learning:** When applying performance optimizations like `React.useMemo` to components that use a `mounted` state pattern (e.g., `if (!mounted) return null;`), the hooks must be called *before* the early return. Calling hooks conditionally violates React's Rules of Hooks and causes linting errors (`react-hooks/rules-of-hooks`).
+**Action:** Always ensure all React hooks (`useMemo`, `useCallback`, `useEffect`, etc.) are placed at the very top of the component body, before any conditional returns, to maintain a consistent hook call order across renders.
