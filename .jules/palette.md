@@ -1,0 +1,3 @@
+## 2024-07-29 - Improve Modal Accessibility
+**Learning:** Custom Modal components (React portals/overlays) must include `role="dialog"`, `aria-modal="true"`, `aria-labelledby`, and `aria-label` on close buttons to ensure proper accessibility for screen readers and keyboard users. Additionally, focus-visible utilities are standard for focus states.
+**Action:** When implementing or modifying custom modal components, consistently apply `role="dialog"`, `aria-modal="true"`, connect a descriptive title using `aria-labelledby`, ensure icon-only close buttons have an `aria-label`, and add `focus-visible` styles for keyboard navigation.
