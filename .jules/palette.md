@@ -1,0 +1,3 @@
+## 2024-07-30 - Modal Dialog Accessibility
+**Learning:** Adding standard focus-visible rings to modal close buttons dramatically improves keyboard navigation visibility, and explicitly setting `role="dialog"`, `aria-modal="true"`, and linking a title via `aria-labelledby` ensures screen readers announce the modal correctly without trapping users in unmarked portals.
+**Action:** Always ensure custom portal/overlay components include explicit ARIA roles and labels, and ensure all interactive controls inside them have focus states matching the design system (`focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]`).
