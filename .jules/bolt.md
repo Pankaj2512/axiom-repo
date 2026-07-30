@@ -1,0 +1,3 @@
+## 2024-07-30 - Memoizing Expensive Derived State with Multiple Contexts
+**Learning:** In components consuming multiple contexts (like `StatsGrid.tsx` using `useProgress`, `useStreaks`, `useRevisionQueue`), context updates from one (e.g., streak changes) trigger full re-renders, causing expensive unmemoized O(N) array filtering on another (e.g., progress array) to recalculate unnecessarily. The `if (!mounted) return null;` pattern means any `useMemo` hooks to fix this must be placed *before* the early return to avoid `react-hooks/rules-of-hooks` violations.
+**Action:** Always wrap expensive derived state (array filtering, reducing) in `React.useMemo` and ensure hooks are called at the top of the component before any hydration early-returns.
