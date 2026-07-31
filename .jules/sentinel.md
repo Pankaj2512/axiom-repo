@@ -1,0 +1,4 @@
+## 2025-02-14 - Leakage of AI API Keys through unauthenticated endpoints and exposure of internal error messages
+**Vulnerability:** The API endpoints under `src/app/api/ai/` (`forecast`, `mentor`, `summarize`) currently lack authentication checks. This leaves the Gemini API exposed to unauthenticated requests, potentially leading to quota exhaustion or unexpected charges. Furthermore, error messages are directly leaked to the client (e.g. `error.message`), which can expose internals.
+**Learning:** Next.js route handlers need explicit auth checks. Returning raw error strings to the client is bad practice.
+**Prevention:** Always verify authentication for sensitive API routes (e.g., using Firebase Auth verification or session checks) and ensure generic error messages are returned to the client while logging specifics on the server.

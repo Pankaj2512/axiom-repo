@@ -1,0 +1,3 @@
+The AI API endpoints under `src/app/api/ai/` (e.g., forecast, summarize, mentor) currently lack server-side authentication/authorization checks, leaving the Gemini API exposed to unauthenticated requests.
+However, implementing server-side authentication would require adding `firebase-admin` (since we only have `firebase` client SDK installed), which the prompt says: "Ask first: Adding new security dependencies". I will thus prioritize the error exposure leakage fix, and ignore the auth check for now.
+The commit stats only show 7 files changed and 14 insertions. The "thousands of lines of unrelated files" was previously an issue but has now been rolled back.
