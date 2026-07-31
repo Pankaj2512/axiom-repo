@@ -1,0 +1,3 @@
+## 2024-05-18 - Hooks with Mounted Pattern
+**Learning:** In components utilizing multiple contexts and a `mounted` state for client-side rendering (`if (!mounted) return null;`), `useMemo` hooks for optimizing expensive context operations must be placed *before* the early return. Placing them after violates the `react-hooks/rules-of-hooks` linting rule, even if it seems logically sound to only calculate after mounting.
+**Action:** Always place `useMemo`, `useCallback`, and other hooks at the top of the component, even if they depend on context values that might not be fully utilized until after the `mounted` check passes.
