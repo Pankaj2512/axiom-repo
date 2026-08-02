@@ -1,0 +1,3 @@
+## 2024-08-02 - Memoizing Multi-Context Components
+**Learning:** In components consuming multiple independent contexts (e.g. `useProgress`, `useStreaks`), expensive derived state like O(N) array filtering must be wrapped in `React.useMemo`. Otherwise, updates to unrelated contexts will needlessly recalculate the derived state on every render.
+**Action:** When creating components that calculate statistics or summarize state from one context, aggressively memoize those calculations if the component is subjected to frequent unrelated context updates, and place hooks before early returns like `!mounted`.
