@@ -1,0 +1,3 @@
+## 2024-08-03 - Modal Accessibility Pattern
+**Learning:** Custom modal implementations using `fixed` overlays often lack critical ARIA attributes (role="dialog", aria-modal="true", and aria-labelledby) which makes them invisible to screen readers as proper dialogs. Icon-only close buttons within these modals frequently lack both `aria-label` and clear keyboard focus states.
+**Action:** When creating or modifying generic Modal components, always ensure the inner content wrapper has `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` pointing to the title ID. Additionally, explicitly add `aria-label` and `focus-visible` utilities to icon-only close buttons.
