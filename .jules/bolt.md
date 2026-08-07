@@ -1,0 +1,4 @@
+
+## 2024-05-17 - Prevent O(N) recalculations on unrelated context updates
+**Learning:** In React components that consume multiple independent contexts (like `useProgress`, `useStreaks`, `useRevisionQueue`), derived state calculations using O(N) operations (e.g., array filtering on the progress list) will needlessly re-run whenever *any* context updates and triggers a render. Additionally, when using the client-side `mounted` pattern (`if (!mounted) return null;`), all hooks must be placed above the early return to avoid `react-hooks/rules-of-hooks` errors.
+**Action:** Always wrap expensive derived calculations in `React.useMemo` with minimal dependency arrays (e.g., just `[progress]`), ensuring the hook is declared above any early return conditions. Precompute calculations dependent strictly on static data (like syllabus lengths) outside the component completely.
