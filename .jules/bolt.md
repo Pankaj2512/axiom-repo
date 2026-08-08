@@ -1,0 +1,3 @@
+## 2026-08-08 - Memoizing derived state to prevent cascading context re-renders
+**Learning:** Components consuming multiple context values (e.g. `useProgress`, `useStreaks`, `useRevisionQueue`) trigger a re-render whenever ANY context updates. O(N) array calculations directly in the component body will re-execute redundantly even if their specific dependency hasn't changed.
+**Action:** Wrap expensive derived state calculations, like reducing arrays or mapping static properties based on context state, inside `React.useMemo` to memoize the calculation specific to the dependency array. Precompute completely static logic (e.g. counting total items in raw application data) outside of component scopes to avoid all per-render recalculation.
