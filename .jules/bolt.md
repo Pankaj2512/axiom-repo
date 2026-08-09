@@ -1,0 +1,3 @@
+## 2024-05-15 - Optimizing Derived State in Multi-Context Components
+**Learning:** In components consuming multiple independent contexts (like `StatsGrid` using `useProgress`, `useStreaks`, and `useRevisionQueue`), derived state calculations involving O(N) operations (e.g. array filtering) can run unnecessarily on every render triggered by ANY context update.
+**Action:** When optimizing such components: 1) Hoist calculations based on imported static data completely outside the component scope to run once at module load. 2) Wrap derived state calculations based on dynamic context data in `React.useMemo` (placing them before any early return to satisfy hooks rules) to prevent redundant O(N) operations during unrelated state changes.
