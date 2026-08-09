@@ -1,0 +1,4 @@
+## 2025-02-14 - Prevented API Error Leakage
+**Vulnerability:** Internal error messages (e.g., from `error.message`) in API routes and authentication flows were being returned directly to the client via `NextResponse.json` and auth return objects.
+**Learning:** This exposes internal backend details, stack traces (in some cases), or internal Firebase error structures, which could aid an attacker in mapping the backend or understanding the nature of failures (like rate limits or specific auth failures).
+**Prevention:** Always log the actual error securely on the server using `console.error` and return a sanitized, generic error string (e.g., 'An internal server error occurred' or 'Authentication failed. Please try again.') to the client. Ensure `catch (error)` is used without explicit `: any` typing to adhere to linting rules.
