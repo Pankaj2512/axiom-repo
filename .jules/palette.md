@@ -1,0 +1,3 @@
+## 2024-08-10 - Accessibility enhancement on conditional Modal component
+**Learning:** When making accessibility improvements that require generating dynamic unique IDs (e.g., using `React.useId()` for `aria-labelledby`) in React components that are conditionally rendered with early returns (`if (!isOpen) return null;`), the hooks MUST be placed at the very top of the functional component before the early return, otherwise it violates React's Rules of Hooks.
+**Action:** When modifying modals or similar dynamically rendered components to add ARIA labels tied to dynamically generated IDs, always ensure `React.useId()` or other hooks are at the top of the component body.
