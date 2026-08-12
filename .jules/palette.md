@@ -1,0 +1,3 @@
+## 2024-08-12 - Modal Accessibility and React Hooks
+**Learning:** When adding accessibility IDs to conditional components (like Modals that `return null` when closed), `React.useId()` must be called before the early return to comply with the rules of hooks. Modals require `role="dialog"`, `aria-modal="true"`, and an `aria-labelledby` linking to a unique title ID. Close buttons need `aria-label` and focus-visible styles.
+**Action:** Always call hooks at the very top of components before any conditional early returns. Ensure custom modal implementations have explicit dialog roles and keyboard-accessible close buttons.
