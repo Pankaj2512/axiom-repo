@@ -1,0 +1,3 @@
+## 2026-07-02 - [StatsGrid Static Data Optimization]
+**Learning:** Static application data aggregations (like calculating total application items from `tracks`) should be done outside component scope to prevent redundant O(N) recalculations on every React render. Combining multiple array filters on mutable state into a single O(N) pass and wrapping in React.useMemo significantly reduces render overhead.
+**Action:** When working with static `tracks` or similar imported JSON-like data, pre-compute aggregate totals at module scope. When filtering the `progress` array for multiple criteria in a component, combine into a single memoized loop instead of chaining multiple `.filter()` calls.
