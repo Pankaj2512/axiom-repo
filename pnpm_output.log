@@ -1,0 +1,59 @@
+
+> axiom-prep@0.1.0 dev /app
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 586ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+○ Compiling /test-stats ...
+ GET /test-stats 200 in 4.7s (next.js: 4.1s, application-code: 587ms)
+[browser] React has detected a change in the order of Hooks called by StatsGrid. This will lead to bugs and errors if not fixed. For more information, read the Rules of Hooks: https://react.dev/link/rules-of-hooks
+
+   Previous render            Next render
+   ------------------------------------------------------
+1. useState                   useState
+2. useContext                 useContext
+3. useContext                 useContext
+4. useState                   useState
+5. useState                   useState
+6. useState                   useState
+7. useCallback                useCallback
+8. useEffect                  useEffect
+9. useContext                 useContext
+10. useState                  useState
+11. useState                  useState
+12. useCallback               useCallback
+13. useEffect                 useEffect
+14. useEffect                 useEffect
+15. undefined                 useMemo
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    at StatsGrid (src/components/dashboard/StatsGrid.tsx:33:62)
+  31 |
+  32 |   // Calculate stats in a single pass
+> 33 |   const { completedItems, thisWeekCompleted } = React.useMemo(() => {
+     |                                                              ^
+  34 |     let completed = 0;
+  35 |     let thisWeek = 0;
+  36 |     const oneWeekAgoTime = new Date().getTime() - 7 * 24 * 60 * 60 * 1000; (src/components/dashboard/StatsGrid.tsx:33:62)
+[browser] Uncaught Error: Rendered more hooks than during the previous render.
+    at StatsGrid (src/components/dashboard/StatsGrid.tsx:33:62)
+    at TestPage (src/app/test-stats/page.tsx:7:7)
+  31 |
+  32 |   // Calculate stats in a single pass
+> 33 |   const { completedItems, thisWeekCompleted } = React.useMemo(() => {
+     |                                                              ^
+  34 |     let completed = 0;
+  35 |     let thisWeek = 0;
+  36 |     const oneWeekAgoTime = new Date().getTime() - 7 * 24 * 60 * 60 * 1000;
+✓ Compiled in 116ms
+ ELIFECYCLE  Command failed.
+[?25h
