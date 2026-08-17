@@ -1,0 +1,3 @@
+## 2026-07-03 - Extract Static Data and Memoize Context Derived Computations
+**Learning:** In components consuming multiple independent contexts (e.g., `useProgress`, `useStreaks`), calculating derived state using static data (like counting total items across nested static arrays) and executing multiple O(N) `.filter()` passes on progress lists directly in the render body causes unnecessary recalculations when unrelated context updates trigger a re-render.
+**Action:** Always extract invariant static calculations completely outside the component scope (e.g., as a module-level constant) and combine derived loop operations into a single O(N) loop wrapped in `React.useMemo` to minimize iteration overhead and avoid blocking the render thread.
