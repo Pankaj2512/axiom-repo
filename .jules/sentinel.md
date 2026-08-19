@@ -1,0 +1,4 @@
+## 2024-08-18 - API Error Leakage Fix
+**Vulnerability:** API routes and authentication methods were exposing internal backend error messages directly to the client by returning `error: error.message` in the catch blocks. This could potentially leak sensitive information about the backend infrastructure, database schemas, or authentication mechanisms.
+**Learning:** Returning explicit internal error messages to users is a security risk. The `any` type on caught errors also suppresses type checking, making it easier to inadvertently leak properties.
+**Prevention:** Always log the actual error securely on the server using `console.error` and return a generic error message (e.g., `"An internal server error occurred"`) to the client. Additionally, remove explicit `any` typings on caught errors (use `catch (error)`) to enforce stricter type handling and satisfy TypeScript/ESLint rules.
