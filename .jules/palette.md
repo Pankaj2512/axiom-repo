@@ -1,0 +1,4 @@
+## 2024-08-21 - Custom Modal Accessibility Constraints
+
+**Learning:** Custom Modal components using React portals/overlays require explicit accessibility bindings (`role="dialog"`, `aria-modal="true"`, and `aria-labelledby` bound to the title's unique ID). Close buttons must declare `focus-visible` styles explicitly (e.g., `focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)]`) because default focus styles are often suppressed or insufficient. Additionally, when conditionally rendering the modal (e.g., `if (!isOpen) return null;`), Hooks like `React.useId()` for generating aria IDs must be invoked *before* the early return to comply with the Rules of Hooks.
+**Action:** Always verify keyboard accessibility (tab order, focus rings) on custom modal overlays. Use `React.useId()` strictly at the top level of the component.
