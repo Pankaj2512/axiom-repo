@@ -1,0 +1,3 @@
+## 2024-08-22 - Optimize derived data aggregations in Dashboard
+**Learning:** In Next.js/React applications, when calculating derived state from large static objects (like total items in a curriculum track) or iterating through collections for multiple metrics, doing so directly in the render path causes O(N) recalculations on every single state change, even unrelated ones (like due revision cards updating).
+**Action:** Extract static calculations completely out of the component lifecycle, and wrap multiple derived data calculations from a single array into a single iteration loop memoized by `React.useMemo`. Ensure hooks like `useMemo` are placed before any conditional early returns.
