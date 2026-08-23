@@ -1,0 +1,3 @@
+## 2024-08-23 - Memoize Array Filtering Based on Mutable State
+**Learning:** In complex interactive dashboard components calculating multiple metrics over a dynamically updated context array, avoid multiple `array.filter()` and map calls on each render. Grouping these iterations into a single O(N) loop and wrapping it in `React.useMemo` memoizes the derived state and significantly reduces overhead on every re-render.
+**Action:** Next time, when dealing with expensive computations derived from a mutable array, wrap it in a `useMemo` and iterate once to compute all needed metrics simultaneously.
