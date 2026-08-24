@@ -1,0 +1,3 @@
+## 2024-03-24 - Pre-computing Static Data and Memoizing Derived Context
+**Learning:** In React components that combine multiple contexts and static application data, computing derived O(N) metrics directly in the render body causes severe performance degradation, as updates in unrelated contexts (like `useStreaks`) trigger unnecessary recalculations of metrics derived from another context (like `useProgress`).
+**Action:** Extract static pre-computations entirely outside the component function (if based on constant data), and wrap array derivations in `React.useMemo`, combining multiple `.filter()` passes into a single iteration block.
