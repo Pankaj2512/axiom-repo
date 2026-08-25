@@ -1,0 +1,4 @@
+## 2025-01-20 - Prevent Internal Backend Details Leakage in API Routes
+**Vulnerability:** The API routes for AI integrations (`/api/ai/forecast`, `/api/ai/mentor`, `/api/ai/summarize`) were returning the raw `error.message` directly in the `NextResponse` when an exception was caught. This leaks internal server-side details (e.g., failed backend connection strings, rate limit metadata) to the client.
+**Learning:** Returning unhandled exception messages to the client can inadvertently expose system architecture, which attackers can use to orchestrate targeted attacks.
+**Prevention:** Catch all backend exceptions, securely log the details server-side using `console.error`, and return a standard generic error string (e.g., "An internal error occurred") to the user.
