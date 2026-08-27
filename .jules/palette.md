@@ -1,0 +1,3 @@
+## 2024-08-27 - Accessible Modals and Hook Ordering
+**Learning:** Custom React portals/overlays (Modals) must explicitly declare `role="dialog"` and `aria-modal="true"`. To properly bind `aria-labelledby` to a unique ID for the title, `React.useId()` must be generated at the very top of the component (before conditional early returns like `if (!isOpen) return null;`) to comply with the rules of hooks. Additionally, close buttons need explicitly declared `focus-visible` styles and an `aria-label` to ensure accessibility and keyboard navigation.
+**Action:** Always place `React.useId()` before early returns in conditionally rendered components and ensure that custom modal overlays include the proper `aria` attributes and focus management on interactive inner elements.
