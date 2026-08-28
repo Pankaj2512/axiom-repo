@@ -1,0 +1,3 @@
+## 2024-10-18 - Modal Accessibility Enhancements
+**Learning:** Custom Modal components in Next.js require explicit `role="dialog"`, `aria-modal="true"`, and `aria-labelledby` binding to the modal's title ID (generated via `React.useId()`). Furthermore, interactive elements within the modal like the close button must have discernible `aria-label` attributes and visible focus states (e.g., using `focus-visible:ring-2`) to support keyboard navigation fully.
+**Action:** Always ensure custom portal/overlay components include explicit ARIA roles and labels, bind unique IDs dynamically using `React.useId()`, and provide clear focus indications for interactive elements.
