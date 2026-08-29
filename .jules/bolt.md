@@ -1,0 +1,3 @@
+## 2024-05-24 - Static App Data Recomputation in Renders
+**Learning:** React components (`StatsGrid`, `CategoryProgress`) were performing O(N^3) nested iterations over static app data (`tracks`, `modules`, `topics`) inside every render cycle to compute fixed totals. Furthermore, derived stats from the `progress` context were calculated via multiple independent `.filter().length` passes over the exact same array, causing heavy CPU overhead.
+**Action:** When working with fixed/static imported data in Next.js/React, compute totals once at the module level outside the component. Use a single `React.useMemo` block with standard `for` loops to combine multiple array filter conditions into a single O(N) iteration instead of chaining expensive array methods.
