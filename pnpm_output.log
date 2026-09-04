@@ -1,0 +1,19 @@
+
+> axiom-prep@0.1.0 dev /app
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 530ms
+
+○ Compiling / ...
+ GET / 200 in 4.7s (next.js: 4.1s, application-code: 590ms)
+ GET /login 200 in 959ms (next.js: 858ms, application-code: 100ms)
+ GET / 200 in 88ms (next.js: 5ms, application-code: 83ms)
+ GET /login 200 in 44ms (next.js: 4ms, application-code: 40ms)
+ GET /test-statsgrid 404 in 780ms (next.js: 638ms, application-code: 142ms)
+ GET /test-statsgrid 200 in 1040ms (next.js: 721ms, application-code: 319ms)
+ ELIFECYCLE  Command failed.
+[?25h
