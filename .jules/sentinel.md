@@ -1,0 +1,4 @@
+## 2024-05-09 - Information Leakage in API and Auth Error Handling
+**Vulnerability:** API routes and authentication methods were catching errors and returning `error.message` directly in the HTTP response or client return object.
+**Learning:** Returning `error.message` directly to the client can leak sensitive internal server details, database query structures, or third-party API error details (e.g., Firebase Auth or Gemini API secrets/internal states).
+**Prevention:** Always log the actual detailed error securely on the server side using `console.error` (or a proper logging service), and return a sanitized, generic error message (like "An internal server error occurred" or "Authentication failed. Please try again.") to the client. Additionally, omit the explicit `: any` type in TypeScript catch blocks, using `catch (error)` instead to avoid `@typescript-eslint/no-explicit-any` errors.
