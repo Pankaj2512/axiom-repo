@@ -1,0 +1,3 @@
+## 2024-03-24 - Custom Modal Accessibility Pattern
+**Learning:** Custom Modals (React portals/overlays) must explicitly declare `role="dialog"` and `aria-modal="true"`. To prevent screen readers from reading raw title text without context, `aria-labelledby` should be bound to a unique ID generated via `React.useId()` for the title. Icon-only close buttons require explicitly declared focus-visible styles (e.g. `focus-visible:ring-2`) and `aria-label` to ensure proper keyboard navigation and accessibility.
+**Action:** When implementing or updating custom modal components in this design system, always use this pattern (explicit roles, `useId` for title association, and focusable close buttons with labels).
