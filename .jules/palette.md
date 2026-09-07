@@ -1,0 +1,3 @@
+## 2024-09-08 - Accessible Modals with conditional rendering
+**Learning:** Custom React Modal components that use early returns (e.g. `if (!isOpen) return null;`) must declare hooks like `React.useId()` *before* the conditional return to avoid violating the rules of hooks. Additionally, these custom modals need explicit `role="dialog"`, `aria-modal="true"`, dynamic `aria-labelledby`, and explicitly defined focus-visible styles on interactive elements like close buttons for full keyboard accessibility.
+**Action:** When adding accessibility to conditionally rendered portal/overlay components, always ensure hook declarations remain at the top level and ensure explicit aria attributes and focus-visible outlines are assigned.
