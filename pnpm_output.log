@@ -1,0 +1,22 @@
+
+> axiom-prep@0.1.0 dev /app
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+- Environments: .env.local
+✓ Ready in 587ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+○ Compiling /_not-found/page ...
+ GET /dashboard 404 in 4.4s (next.js: 3.9s, application-code: 553ms)
+ GET /dashboard 404 in 81ms (next.js: 6ms, application-code: 74ms)
+ GET /test-stats 404 in 67ms (next.js: 5ms, application-code: 63ms)
+ GET /test-stats 200 in 1310ms (next.js: 981ms, application-code: 330ms)
+ ELIFECYCLE  Command failed.
+[?25h
