@@ -43,8 +43,8 @@ Raw Notes: ${notes || 'No notes provided, just generate a standard cheat sheet f
       success: true, 
       summary: response.text 
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("AI Summarizer Error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: 'An internal error occurred while processing your request.' }, { status: 500 });
   }
 }

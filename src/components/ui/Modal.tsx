@@ -9,6 +9,8 @@ interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+  const titleId = React.useId();
+
   if (!isOpen) return null;
 
   return (
@@ -18,12 +20,18 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative w-full max-w-lg bg-[var(--bg-secondary)] border border-white/10 rounded-xl shadow-2xl p-6 animate-in zoom-in-95 duration-200">
+      <div 
+        className="relative w-full max-w-lg bg-[var(--bg-secondary)] border border-white/10 rounded-xl shadow-2xl p-6 animate-in zoom-in-95 duration-200"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+      >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <h2 id={titleId} className="text-xl font-bold text-white">{title}</h2>
           <button 
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors"
+            aria-label="Close modal"
+            className="text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-primary)] rounded-sm"
           >
             <X className="w-5 h-5" />
           </button>

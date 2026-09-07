@@ -12,26 +12,37 @@ const TRACK_COLORS: Record<string, string> = {
   fresher: 'var(--warning)',
 };
 
+// Pre-compute static totals for each track
+const TRACK_TOTALS: Record<string, number> = {};
+tracks.forEach(track => {
+  let total = 0;
+  track.modules.forEach(m => {
+    m.topics.forEach(t => {
+      total += t.items.length;
+    });
+  });
+  TRACK_TOTALS[track.id] = total;
+});
+
 export function CategoryProgress() {
   const { progress } = useProgress();
 
-  const categories = tracks.map(track => {
-    let total = 0;
-    track.modules.forEach(m => {
-      m.topics.forEach(t => {
-        total += t.items.length;
-      });
-    });
+  const categories = React.useMemo(() => {
+    // Single pass to count completed items per track
+    const completedCounts: Record<string, number> = {};
+    for (const p of progress) {
+      if (p.status === 'COMPLETED' && p.trackId) {
+        completedCounts[p.trackId] = (completedCounts[p.trackId] || 0) + 1;
+      }
+    }
 
-    const completed = progress.filter(p => p.trackId === track.id && p.status === 'COMPLETED').length;
-
-    return {
+    return tracks.map(track => ({
       name: track.name,
-      completed,
-      total,
+      completed: completedCounts[track.id] || 0,
+      total: TRACK_TOTALS[track.id] || 0,
       color: TRACK_COLORS[track.id] || 'var(--accent-secondary)'
-    };
-  });
+    }));
+  }, [progress]);
 
   return (
     <Card className="p-6">

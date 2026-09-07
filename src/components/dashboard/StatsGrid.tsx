@@ -10,6 +10,13 @@ import { useRevisionQueue } from '@/hooks/useRevisionQueue';
 import { tracks } from '@/data/tracks';
 import Link from 'next/link';
 
+// Calculate static stats once
+const TOTAL_ITEMS = tracks.reduce((sum, track) =>
+  sum + track.modules.reduce((mSum, mod) =>
+    mSum + mod.topics.reduce((tSum, topic) => tSum + topic.items.length, 0)
+  , 0)
+, 0);
+
 export function StatsGrid() {
   const [mounted, setMounted] = React.useState(false);
   const { progress } = useProgress();
@@ -20,26 +27,23 @@ export function StatsGrid() {
     setMounted(true);
   }, []);
 
+  const { completedItems, overallPercentage, thisWeekCompleted } = React.useMemo(() => {
+    const completed = progress.filter(p => p.status === 'COMPLETED');
+    const compItems = completed.length;
+    const percentage = TOTAL_ITEMS > 0 ? Math.round((compItems / TOTAL_ITEMS) * 100) : 0;
+
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const thisWeek = completed.filter(p =>
+      p.completedAt && (
+        (p.completedAt instanceof Date ? p.completedAt.getTime() : new Date((p.completedAt as any).seconds ? (p.completedAt as any).seconds * 1000 : p.completedAt).getTime()) > oneWeekAgo.getTime()
+      )
+    ).length;
+
+    return { completedItems: compItems, overallPercentage: percentage, thisWeekCompleted: thisWeek };
+  }, [progress]);
+
   if (!mounted) return null;
-
-  // Calculate stats
-  const totalItems = tracks.reduce((sum, track) => 
-    sum + track.modules.reduce((mSum, mod) => 
-      mSum + mod.topics.reduce((tSum, topic) => tSum + topic.items.length, 0)
-    , 0)
-  , 0);
-
-  const completedItems = progress.filter(p => p.status === 'COMPLETED').length;
-  const overallPercentage = totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
-
-  // Calculate items completed this week
-  const oneWeekAgo = new Date();
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-  const thisWeekCompleted = progress.filter(p => 
-    p.status === 'COMPLETED' && p.completedAt && (
-      (p.completedAt instanceof Date ? p.completedAt.getTime() : new Date((p.completedAt as any).seconds ? (p.completedAt as any).seconds * 1000 : p.completedAt).getTime()) > oneWeekAgo.getTime()
-    )
-  ).length;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-fade-in">

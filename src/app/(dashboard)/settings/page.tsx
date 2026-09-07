@@ -4,11 +4,12 @@ import * as React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/contexts/AuthContext';
+import { signOut } from '@/lib/auth';
 import { Settings, Download, Upload, LogOut } from 'lucide-react';
 import { getAllUserProgress, getUserCustomLists, getUserNotes, getDueRevisionCards } from '@/lib/firestore';
 
 export default function SettingsPage() {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const [isExporting, setIsExporting] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 

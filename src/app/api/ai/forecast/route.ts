@@ -22,7 +22,8 @@ export async function POST(req: Request) {
       success: true, 
       plan: mockPlan 
     });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error) {
+    console.error("AI Forecast Error:", error);
+    return NextResponse.json({ error: 'An internal error occurred while processing your request.' }, { status: 500 });
   }
 }

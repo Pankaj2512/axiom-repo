@@ -41,8 +41,8 @@ User's Question: ${question}
       success: true, 
       reply: response.text
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("AI Mentor Error:", error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ error: 'An internal error occurred while processing your request.' }, { status: 500 });
   }
 }
