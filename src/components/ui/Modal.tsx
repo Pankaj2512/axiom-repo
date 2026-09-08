@@ -6,9 +6,11 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  maxWidth?: string;
+  className?: string;
 }
 
-export function Modal({ isOpen, onClose, title, children }: ModalProps) {
+export function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-lg', className }: ModalProps) {
   const titleId = React.useId();
 
   if (!isOpen) return null;
@@ -21,7 +23,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
         aria-hidden="true"
       />
       <div 
-        className="relative w-full max-w-lg bg-[var(--bg-secondary)] border border-white/10 rounded-xl shadow-2xl p-6 animate-in zoom-in-95 duration-200"
+        className={`relative w-full ${maxWidth} bg-[var(--bg-secondary)] border border-white/10 rounded-xl shadow-2xl p-6 animate-in zoom-in-95 duration-200 ${className || ''}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}

@@ -2,7 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { getAllUserProgress, updateUserProgress } from '@/lib/firestore';
+import { getAllUserProgress, updateUserProgress, updateRevisionCard } from '@/lib/firestore';
+import { createNewRevisionCard } from '@/lib/spacedRepetition';
 import { UserProgress } from '@/types';
 
 interface ProgressContextType {
@@ -61,6 +62,14 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       status: 'COMPLETED',
       completedAt: new Date()
     });
+
+    // Auto-queue for Spaced Repetition Revision
+    try {
+      const newCard = createNewRevisionCard(user.uid, itemId);
+      await updateRevisionCard(user.uid, itemId, newCard);
+    } catch (cardErr) {
+      console.warn("Could not auto-queue revision card:", cardErr);
+    }
     
     // Refresh to ensure exact sync with server (in background)
     await fetchProgress(); 
@@ -85,6 +94,16 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       status: newStatus,
       completedAt: newStatus === 'COMPLETED' ? new Date() : null
     });
+
+    // If marked complete, auto-queue into Spaced Repetition
+    if (newStatus === 'COMPLETED') {
+      try {
+        const newCard = createNewRevisionCard(user.uid, itemId);
+        await updateRevisionCard(user.uid, itemId, newCard);
+      } catch (cardErr) {
+        console.warn("Could not auto-queue revision card:", cardErr);
+      }
+    }
     
     // Keep in background so UI feels snappy
     fetchProgress(); 
