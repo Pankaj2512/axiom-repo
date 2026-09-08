@@ -5,6 +5,7 @@ import { StatsGrid } from '@/components/dashboard/StatsGrid';
 import { StreakCalendar } from '@/components/dashboard/StreakCalendar';
 import { CategoryProgress } from '@/components/dashboard/CategoryProgress';
 import { StudyForecaster } from '@/components/analytics/StudyForecaster';
+import { MockInterviewLaunchpad } from '@/components/dashboard/MockInterviewLaunchpad';
 
 export default function DashboardPage() {
   return (
@@ -17,6 +18,11 @@ export default function DashboardPage() {
       {/* Top Stats */}
       <section>
         <StatsGrid />
+      </section>
+
+      {/* Mock Interview Launchpad Banner */}
+      <section>
+        <MockInterviewLaunchpad />
       </section>
 
       {/* Middle Grid */}
