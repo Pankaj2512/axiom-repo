@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, BookOpen, Code2, Brain, ListChecks, FileText, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Code2, Brain, Bot, ListChecks, FileText, Settings, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
 import { signOut } from '@/lib/auth';
@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { label: 'Syllabus', href: '/syllabus', icon: BookOpen },
   { label: 'Practice Log', href: '/practice', icon: Code2 },
   { label: 'Revision', href: '/revision', icon: Brain },
+  { label: 'Mock Interview', href: '/mock-interview', icon: Bot },
   { label: 'Custom Lists', href: '/lists', icon: ListChecks },
   { label: 'Notes', href: '/notes', icon: FileText },
   { label: 'Settings', href: '/settings', icon: Settings },
