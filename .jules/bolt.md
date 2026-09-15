@@ -1,0 +1,3 @@
+## 2024-05-24 - O(N) Passes vs Multiple Array Filters
+**Learning:** Using multiple `.filter()` passes inside `React.useMemo` for derived statistics creates unneeded intermediate arrays and iterations (O(2N)). React apps consuming contexts with large data structures like `progress` lists can suffer performance dips during recalculation.
+**Action:** When filtering an array for multiple derived metrics in a React component, combine the checks into a single O(N) loop rather than using multiple `.filter()` passes to minimize iteration overhead and avoid garbage collection hits from intermediate allocations.
