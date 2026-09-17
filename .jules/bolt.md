@@ -1,0 +1,3 @@
+## 2024-09-17 - Reduce React Re-renders Overhead by Combining Array Filters
+**Learning:** Multiple consecutive array iterations like `completed = arr.filter(...)` and then `completed.filter(...)` add significant overhead for multiple derived state variables (e.g., `completedItems`, `thisWeekCompleted`) computed inside React useMemo, particularly on dashboards iterating over the same lists of user progress.
+**Action:** When filtering an array for multiple derived metrics in a React component, replace multiple `.filter()` passes with a single O(N) iteration loop inside the `useMemo` block to minimize recalculation overhead.
