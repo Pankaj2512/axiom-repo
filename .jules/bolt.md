@@ -1,0 +1,3 @@
+## 2024-11-20 - Array Processing Optimization in React Components
+**Learning:** Using multiple `.filter()` passes on a state array to derive different metrics (e.g., total completed, completed this week) creates unnecessary intermediate arrays and O(N) iterations. In components that render frequently or have large data sets like `progress`, this allocation overhead can cause performance degradation.
+**Action:** Combine multiple filtering conditions into a single O(N) loop (using standard `for...of` loops and accumulator variables) inside a `useMemo` block to derive all needed metrics in one pass without allocating intermediate arrays.
