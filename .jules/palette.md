@@ -1,0 +1,3 @@
+## 2024-09-20 - Interactive Elements inside Link Wrappers
+**Learning:** In complex interactive cards wrapped in `<Link>`, focus management and ARIA bindings must be explicitly placed on the interactive inner elements (e.g., buttons, external links) rather than relying on the parent wrapper's generic focus. If they don't have aria labels, screen readers will have trouble. Inner buttons in these components also need visible focus states (`focus-visible:ring-2`) and aria attributes (`aria-label`, `aria-haspopup`, `aria-expanded`).
+**Action:** When designing a clickable card with internal actions, explicitly assign focus styles and ARIA labels to the inner elements.
