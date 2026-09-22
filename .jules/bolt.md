@@ -1,0 +1,3 @@
+## 2024-05-15 - Context Getter O(N) Lookup Patterns
+**Learning:** Using `Array.find` inside a context getter method (like `getProgressForItem`) creates an O(N*M) performance bottleneck when rendering lists of M items (where N is the length of the array), as the O(N) search runs on every item render. This is especially problematic for progress data which grows over time.
+**Action:** When exposing item-specific getters from a global context array, always memoize the array into a `Map` (keyed by item ID) inside the context provider. This reduces getter lookups from O(N) to O(1) and overall list rendering from O(N*M) to O(N+M).
