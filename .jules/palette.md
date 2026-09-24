@@ -1,0 +1,3 @@
+## 2024-06-25 - Keyboard Accessibility on Nested Interactive Elements in Link Cards
+**Learning:** When building interactive cards that serve as a large clickable `<Link>`, nested interactive elements (like icon-only buttons or external links) often lack sufficient focus styles. This creates a confusing experience for keyboard users who cannot distinguish which inner element is currently focused versus the entire card.
+**Action:** Always ensure that any interactive elements (buttons, inputs, links) nested inside a clickable card have explicit `aria-label`s (especially if they are icon-only) and clear `focus-visible` styles with a focus ring to distinguish them from the parent card's generic focus state.
