@@ -1,0 +1,3 @@
+## 2024-10-24 - Interactive Elements inside Card Wrappers
+**Learning:** When creating complex interactive cards wrapped in a Next.js `<Link>` or generic `<a>` tag, screen readers and keyboard navigation (Tab order) can struggle if inner buttons or links lack explicit accessibility definitions. Users may not know what a nested icon-only button does or struggle to see when it's focused.
+**Action:** Always explicitly bind `aria-label` (and attributes like `aria-haspopup` for dropdowns) as well as robust `focus-visible` styles (e.g. `focus-visible:ring-2`) directly onto the inner interactive elements (buttons, anchors) within the card, rather than relying on the parent wrapper's generic focus.
