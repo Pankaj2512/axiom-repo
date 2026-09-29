@@ -1,0 +1,3 @@
+## 2026-09-29 - O(N*M) List Rendering Bottleneck
+**Learning:** The application extensively uses global contexts (like `ProgressContext`) for tracking data that is rendered iteratively in large lists (e.g., `ProgressContext.getProgressForItem` being called per item). Because the data is originally structured as an Array, lookups within lists result in O(N*M) time complexity, creating a severe bottleneck during React renders.
+**Action:** Always memoize global context arrays into a `Map` keyed by the lookup ID (e.g., using `useMemo`) before passing getter functions to consuming components. This transforms O(N*M) list rendering into O(1) lookups per item, bypassing the performance bottleneck without altering the API surface.
