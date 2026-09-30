@@ -1,0 +1,3 @@
+## 2024-05-18 - Nested Interactive Elements inside Link Cards
+**Learning:** Complex interactive cards wrapped in Next.js `<Link>` tags natively consume tab focus for the entire card, but nested interactive elements (icon buttons, dropdown toggles, external links) remain hidden to screen readers and keyboard users if they lack explicit ARIA labels and `focus-visible` indicators. Generic wrapper focus is insufficient.
+**Action:** Always place explicit `focus-visible:ring-2` styles and specific `aria-label`/`aria-expanded` attributes directly on inner interactive elements within clickable card components to preserve granular accessibility.
