@@ -1,0 +1,3 @@
+## 2024-10-01 - O(N) context lookups inside list items
+**Learning:** Exposing a `getProgressForItem` getter from `ProgressContext` that performs an `Array.find()` internally causes O(N) lookup time. When called from within components rendering large lists of items (e.g., `ItemCard`), this results in an O(N*M) performance bottleneck, drastically slowing down render times as the user's progress and list of items grow.
+**Action:** When a global context exposes item-specific data to be consumed by list items, always memoize the context array into a `Map` keyed by the item ID inside the provider. Update the getter to use the `Map` for O(1) lookups, preventing severe iteration overhead during list rendering.
