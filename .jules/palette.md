@@ -1,0 +1,3 @@
+## 2024-11-20 - Ensure a11y within Link wrappers
+**Learning:** When complex interactive cards are wrapped in Next.js `<Link>` tags (e.g., `ItemCard`), explicit focus states (`focus-visible:ring-2`) and ARIA bindings (`aria-label`, `aria-expanded`) must be placed directly on the inner interactive elements (buttons, secondary links) to ensure accessibility, as the parent wrapper's generic focus ring is insufficient for screen readers and keyboard users.
+**Action:** When adding secondary actions inside card links, always add individual `focus-visible` ring styles and specific `aria-labels` to inner elements to prevent focus getting lost or being announced generically by screen readers.
