@@ -1,0 +1,3 @@
+## 2024-10-04 - [Optimize Context Array Lookups with Map Memoization]
+**Learning:** [When rendering lists of items that each need to derive their specific state from an array in a React Context, using an O(N) lookup (e.g. `Array.find()`) leads to an O(N*M) performance bottleneck, as the array is re-scanned for every single item rendered.]
+**Action:** [To prevent this, memoize the array into a Map using `useMemo` keyed by the item ID within the context provider. Expose a getter function that performs an O(1) Map lookup, which reduces the total lookup time and vastly improves rendering performance for large lists.]
