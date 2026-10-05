@@ -1,0 +1,3 @@
+## 2023-10-26 - O(N*M) bottlenecks during list rendering when using context arrays
+**Learning:** In the React `ProgressContext`, doing an `Array.find()` (O(N)) lookup for every item in a large list (M items) during render creates a severe O(N*M) performance bottleneck, especially on dashboards or long list views where `getProgressForItem` is called repeatedly per item.
+**Action:** When exposing item-specific getters from a global context array, always memoize the array into a `Map` keyed by the item ID (`useMemo`) to reduce lookup time to O(1), preventing re-render slowdowns.
