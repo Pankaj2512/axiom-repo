@@ -1,0 +1,3 @@
+## 2023-10-24 - Accessibility of Nested Interactive Elements in Link Wrappers
+**Learning:** When complex interactive components like `ItemCard` are entirely wrapped in Next.js `<Link>` tags to make the whole card clickable, the generic focus ring applied to the parent `<Link>` is insufficient for screen readers and keyboard users trying to access secondary actions (like "save to list" or "mark complete" buttons) nested inside.
+**Action:** Always ensure that nested buttons and links within a parent clickable wrapper have explicitly declared `aria-label` attributes and explicit `focus-visible:ring-2` styles (along with `focus-visible:outline-none`) to provide clear boundaries and accessibility descriptions for these secondary interactions.
