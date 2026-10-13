@@ -1,0 +1,3 @@
+## 2024-10-13 - O(N*M) bottlenecks in React Context for lists
+**Learning:** When a React Context exposes a getter function that performs an `Array.find` (O(N)) on an array of length N, and this context is consumed by a list of M components (e.g., `ItemCard`s rendering items), it creates an O(N*M) performance bottleneck on every render.
+**Action:** Memoize the array into a `Map` (keyed by item ID) inside the context provider. This reduces the lookup time in the getter function from O(N) to O(1), eliminating the bottleneck when rendering long lists.
