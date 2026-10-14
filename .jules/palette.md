@@ -1,0 +1,3 @@
+## 2024-05-18 - Added Accessibility Attributes to ItemCard
+**Learning:** Complex interactive components with nested buttons inside a `<Link>` wrapper require manually applying `aria-label`, `aria-expanded` (if applicable), and custom explicit `focus-visible` ring styles to those inner buttons, as the wrapper's generic styles are insufficient for keyboard and screen reader accessibility.
+**Action:** When working on components that nest interactive elements like custom dropdown triggers and toggle buttons, verify focus visibility manually with keyboard navigation (Tab) and ensure proper explicit ARIA tags are added directly to the buttons.
