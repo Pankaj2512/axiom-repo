@@ -1,0 +1,3 @@
+## 2024-05-18 - Optimizing Global Progress Context Lookups
+**Learning:** Found a critical performance anti-pattern where components rendering long lists (like syllabus items) each query a global array context (`progress.find(p => p.itemId === id)`). In large applications, this creates an O(N*M) lookup bottleneck (where N is the number of rendered items and M is the size of the progress array).
+**Action:** Instead of maintaining the state strictly as an array in context, memoize the array into a `Map` keyed by `itemId` inside the context provider. This reduces the getter lookup complexity from O(N) to O(1) for all consuming components, effectively eliminating the bottleneck.
