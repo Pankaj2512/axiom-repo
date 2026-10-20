@@ -1,0 +1,3 @@
+## 2023-10-20 - Adding explicit ARIA and focus-visible states to elements nested in Next.js Links
+**Learning:** When complex interactive cards are wrapped in Next.js `<Link>` tags (e.g., `ItemCard`), explicit focus states (`focus-visible:ring-2`) and ARIA bindings (`aria-label`, `aria-expanded`) must be placed directly on the inner interactive elements (buttons, secondary links) to ensure accessibility, as the parent wrapper's generic focus ring is insufficient for screen readers and keyboard users.
+**Action:** When working on interactive cards that are also links, always verify and explicitly add `focus-visible` ring classes and `aria-label`s to nested buttons/links.
