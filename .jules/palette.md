@@ -1,0 +1,3 @@
+## 2026-10-30 - Add ARIA Labels and Focus States to Icon Buttons
+**Learning:** The application extensively uses icon-only buttons (e.g., in ItemCard, Modal, MentorChat, StudyForecaster) that lack accessible names, meaning screen readers announce them as just 'button'. Many also lack distinct keyboard focus indicators or use non-standard styling that fails to properly show focus.
+**Action:** Add `aria-label` attributes and explicit `focus-visible:ring-2` tailwind classes (with appropriate offset colors depending on the background) to icon-only buttons globally to ensure WCAG compliance for both screen reader and keyboard-only users.
